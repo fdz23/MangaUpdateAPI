@@ -12,7 +12,7 @@ namespace MangaUpdateAPI.DAO
         {
             int mangaId = Insert(manga);
 
-            string sql = $"INSERT INTO MangaFromUser (MangaUserId,MangaId) VALUES ({user.Id},{mangaId})";
+            string sql = $"INSERT INTO MangaFromUser (MangaUserId,MangaId) OUTPUT Inserted.{_primaryKey} VALUES ({user.Id},{mangaId})";
 
             using var con = new SqlServerConnection().ObtainConnection();
             var cmd = new SqlCommand(sql, con);
@@ -20,7 +20,7 @@ namespace MangaUpdateAPI.DAO
             return (int)cmd.ExecuteScalar();
         }
 
-        public List<Manga> ObtainMangaFromUser(User user)
+        public List<Manga> GetMangaFromUser(User user)
         {
             var mangas = new List<Manga>();
 
