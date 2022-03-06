@@ -21,10 +21,9 @@ namespace MangaUpdateAPI.Model
         [Insertable(IsInsertable = true)]
         public string Url { get; set; }
 
-        public bool HasReadLatestChapter()
-        {
-            return Equals(Chapter, LastChapterRead);
-        }
+        public bool HasReadLatestChapter() => Equals(Chapter, LastChapterRead);
+
+        public string ObtainNextChapter() => (Convert.ToInt32(LastChapterRead) + 1).ToString();
 
         public override void Populate(SqlDataReader reader)
         {
