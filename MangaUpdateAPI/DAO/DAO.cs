@@ -72,7 +72,7 @@ namespace MangaUpdateAPI.DAO
         public virtual void Update(T instance)
         {
             string columnsIntoValues = SqlHelper.ObtainColumnsIntoValues(instance);
-            string sql = $"UPDATE {_tableName} SET ({columnsIntoValues}) WHERE {_primaryKey} = {instance.Id}";
+            string sql = $"UPDATE {_tableName} SET {columnsIntoValues} WHERE {_primaryKey} = {instance.Id}";
 
             using var con = new SqlServerConnection().ObtainConnection();
             var cmd = new SqlCommand(sql, con);
